@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MusciToolkitDBEntities-Web.config Connection String" description="MusciToolkitDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.MTKDB.csdl|res://*/Models.MTKDB.ssdl|res://*/Models.MTKDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=testproj20181130095139dbserver.database.windows.net;initial catalog=MusciToolkitDB;persist security info=True;user id=russ;password=TeamWork540!;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Adam\\source\\repos\\540GPWorkingBuild\\540GPWorkingBuild\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MusciToolkitDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

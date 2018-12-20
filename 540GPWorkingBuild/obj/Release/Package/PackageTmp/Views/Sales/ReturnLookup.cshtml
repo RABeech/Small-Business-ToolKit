@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Controllers.SalesController.soWithItems>
+@{
+    ViewBag.Title = "ReturnLookup";
+}
+
+<h2>Return Lookup</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Transaction ID
+        </th>
+        <th>
+            Customer ID
+        </th>
+        <th>
+            Employee ID
+        </th>
+        <th>
+            Sale Date
+        </th>
+        <th>
+            Total Items
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        double price = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getTotalSalePrice(item.s.SaleID);
+        int items = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getTotalSaleItems(item.s.SaleID);
+        string status = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getStatus(item.s.SaleID);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.SaleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.saleDateString)
+            </td>
+            <td>
+                @Html.Name(items.ToString())
+            </td>
+            <td>
+                $@Html.Name(price.ToString())
+            </td>
+            <td>
+                @Html.Name(status)
+            </td>
+            <td>
+                @Html.ActionLink("Return Item(s)", "Details", new { id = item.s.SaleID })
+            </td>
+        </tr>
+    }
+
+</table>

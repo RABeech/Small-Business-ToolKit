@@ -1,0 +1,46 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.Category>
+
+@{
+    /**/
+
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+@Html.ActionLink("Create new", "Create")
+<table class="table">
+    <tr>
+        <th>
+            Category
+        </th>
+
+        <th>
+            ID
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category1)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<a href="~/Inventories/Index" class="btn btn-info">Return to Inventory</a>

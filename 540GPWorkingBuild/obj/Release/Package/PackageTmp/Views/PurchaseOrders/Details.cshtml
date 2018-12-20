@@ -1,0 +1,127 @@
+﻿<!--
+***DONE*** GMEEKS 11/29
+-->
+
+@model _540GPWorkingBuild.Controllers.PurchaseOrdersController.poWithItems
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Purchase Order Details</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Purchase Order ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.p.PurchaseOrderID)
+        </dd>
+        <dt>
+            Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.p.dateStr)
+        </dd>
+
+        <dt>
+            Total ($)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.p.totalPrice)
+        </dd>
+
+        <div>
+            <p>
+
+            </p>
+        </div>
+        <!--
+            <div>
+                @if ((Model.itemList.Any()) && (Model.itemList.First().Received == Model.itemList.First().Quantity))
+                {@Html.ActionLink("Return Purchase Order", "Return", "PurchaseOrders", new { id = Model.p.PurchaseOrderID }, null)}
+            </div>
+        -->
+        <div>
+            @if ((!(Model.itemList.Any())) || ((Model.itemList.Any()) && (Model.itemList.First().Received == 0)))
+            {@Html.ActionLink("Cancel Purchase Order", "Cancel", "PurchaseOrders", new { id = Model.p.PurchaseOrderID }, null)}
+        </div>
+        <div>
+            <p>
+
+            </p>
+        </div>
+
+        <div>
+            @if ((Model.itemList.Any()) && (Model.itemList.First().Received == 0))
+            {@Html.ActionLink("Receive Purchase Order", "Receive", "PurchaseOrders", new { id = Model.p.PurchaseOrderID }, null)}
+        </div>
+
+        <div>
+            <p>
+
+            </p>
+        </div>
+
+        <div>
+            @if (!(Model.itemList.Any()) || Model.itemList.First().Received == 0)
+            {@Html.ActionLink("Add Item", "Create", "PurchaseOrderItems")}
+
+        </div>
+    </dl>
+
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Product ID
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Net Price (ea)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Net price (line)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.itemList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.NetPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+
+            <td>
+                @if ((item.Received == 0))
+                {@Html.ActionLink("Cancel Item", "Cancel", "PurchaseOrderItems", new { id = item.POItemID }, null)}
+            </td>
+        </tr>
+    }
+
+</table>
+<br/>
+<a href="~/PurchaseOrders/PurchaseOrderHome" class="btn btn-info">Back to Purchase Orders</a>

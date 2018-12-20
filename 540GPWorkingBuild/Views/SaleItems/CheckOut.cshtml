@@ -1,0 +1,90 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.SaleItem>
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2>Check Out</h2>
+
+<p style="text-align:left;">
+    Thanks for shopping with us
+    <span style="float:right;">864-864-8644</span>
+</p>
+<p style="text-align:left;">
+    Transaction ID: @Html.Name(Session["Current SaleID"].ToString())
+    <span style="float:right;">Date: </span>
+</p>
+<p>Employee ID: @Html.DisplayName(Session["UserID"].ToString())</p>
+<p>Customer ID: @Html.Name(Session["Current CustomerID"].ToString())</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inventory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSIPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(x => x.SaleID == Int32.Parse(Session["Current SaleID"].ToString())))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSIPrice)
+            </td>
+        </tr>
+    }
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale.TotalSaleItems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale.TotalSalePrice)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @if (Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayFor(model => model.LastOrDefault().Sale.TotalSaleItems)}
+            @if (!Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayName("0")}
+        </td>
+        <td>
+            @if (Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayFor(model => model.LastOrDefault().Sale.TotalSalePrice)}
+            @if (!Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayName("0")}
+        </td>
+    </tr>
+
+</table>
+
+<p>
+    <div style='text-align:right;'>
+        @Html.ActionLink("Confirm Purchase", "TransactionLookup", "Sales")
+    </div>
+    <div style='text-align:right;'>
+        @Html.ActionLink("Cancel Purchase", "Cancel", "Sales", new { id = Model.LastOrDefault().SaleID }, null)
+    </div>
+</p>

@@ -1,0 +1,50 @@
+﻿@model _540GPWorkingBuild.Models.PurchaseOrderItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PurchaseOrderItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Received)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Received)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrder.PurchaseOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrder.PurchaseOrderID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.POItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

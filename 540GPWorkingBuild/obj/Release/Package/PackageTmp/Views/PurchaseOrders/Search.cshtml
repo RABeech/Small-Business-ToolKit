@@ -1,0 +1,96 @@
+﻿<!--
+***DONE*** GMEEKS 11/29
+-->
+
+@model IEnumerable<_540GPWorkingBuild.Controllers.PurchaseOrdersController.poWithItems>
+
+@{
+    ViewBag.Title = "Search";
+}
+<h3>
+    Purchase Order Lookup
+</h3>
+<div>
+    <p>
+
+    </p>
+</div>
+
+@using (Html.BeginForm("Search", "PurchaseOrders", FormMethod.Get))
+{
+
+    //the following are search options
+    <b>Search Option: </b>
+    @Html.RadioButton("option", "ID")<text>PurchaseOrder ID</text>
+    @Html.RadioButton("option", "Date") <text>Date</text>
+    @Html.RadioButton("option", "Status")<text>Status</text>
+    @Html.TextBox("search")
+    <input type="submit"
+           name="submit"
+           value="Search" />
+}
+<div>
+
+</div>
+<div>
+
+</div>
+<div>
+    <p>
+        Status can be searched by OPEN or CLOSED
+    </p>
+</div>
+<div>
+    <p>
+        Date can be searched by date format MM/DD/YEAR
+    </p>
+</div>
+
+<div>
+</div>
+
+<div><b> @if (!(Model.Any())){ @Html.Name("No search results")}</b></div>
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Order Date
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th>
+            Order Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        double price = ((_540GPWorkingBuild.Controllers.PurchaseOrdersController)this.ViewContext.Controller).getTotalPrice(item.p.PurchaseOrderID);
+        string status = ((_540GPWorkingBuild.Controllers.PurchaseOrdersController)this.ViewContext.Controller).getStatus(item.p.PurchaseOrderID);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.p.PurchaseOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p.dateStr)
+            </td>
+            <td>
+                @Html.Name(price.ToString())
+            </td>
+            <td>
+                @Html.Name(status)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.p.PurchaseOrderID })
+            </td>
+
+        </tr>
+    }
+
+</table>
+<a href="~/PurchaseOrders/PurchaseOrderHome" class="btn btn-info">Return to purchase order menu</a>
+

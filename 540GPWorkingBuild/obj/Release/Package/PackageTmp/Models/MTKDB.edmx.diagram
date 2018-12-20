@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5e94c595c9484b90a87466ea89a95561" Name="Diagram1" ZoomLevel="56">
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Address" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Category" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Customer" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Employee" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.EmployeeRole" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Inventory" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.PurchaseOrder" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.PurchaseOrderItem" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.Sale" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.SaleItem" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusciToolkitDBModel.database_firewall_rules" Width="1.5" PointX="9.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Customer_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Employee_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Inventory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Sale_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Employee_EmployeeRole" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_Sale_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_PurchaseOrderItems_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_SaleItems_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_PurchaseOrderItems_PurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MusciToolkitDBModel.FK_SaleItems_Sale" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

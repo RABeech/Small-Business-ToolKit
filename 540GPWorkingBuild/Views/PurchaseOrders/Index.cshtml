@@ -1,0 +1,51 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Purchase Orders</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Order Date
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th>
+            Order Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        double price = ((_540GPWorkingBuild.Controllers.PurchaseOrdersController)this.ViewContext.Controller).getTotalPrice(item.PurchaseOrderID);
+        string status = ((_540GPWorkingBuild.Controllers.PurchaseOrdersController)this.ViewContext.Controller).getStatus(item.PurchaseOrderID);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateStr)
+            </td>
+            <td>
+                @Html.Name(price.ToString())
+            </td>
+            <td>
+                @Html.Name(status)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.PurchaseOrderID })
+            </td>
+
+        </tr>
+    }
+
+</table>
+<a href="~/PurchaseOrders/PurchaseOrderHome" class="btn btn-info">Return to purchase order menu</a>

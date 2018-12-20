@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Music Store Toolkit</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        .mynav_navbar {
+            overflow: hidden;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .mynav_navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .mynav_dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .mynav_dropdown .mynav_dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .mynav_navbar a:hover, .mynav_dropdown:hover .mynav_dropbtn {
+            background-color: #1976D2;
+        }
+
+        .mynav_dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .mynav_dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .mynav_dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .mynav_dropdown:hover .mynav_dropdown-content {
+            display: block;
+        }
+
+        .banner_area {
+            background-image: url(https://i.imgur.com/aH9Nr58.png);
+            background-repeat: round;
+            height: 150px;
+            width: 100%;
+            margin: auto;
+            border-bottom: 2px solid #1976D2;
+            padding-top: 30px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .banner_text {
+            padding: 20px;
+            
+        }
+
+        header {
+            border-style: none;
+            border-color: #1976D2;
+            margin-left: 45px;
+            margin-right: 45px;
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="banner_area">
+            <div class"banner_text">
+                <h1><strong><font color="#fffff">Music Store Toolkit</font></strong></h1>
+                <h3 class="subheading"><strong><font color="#fffff">Navigation</font></strong></h3>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-inverse" style="border-style:none;">
+            <div class="container">
+                <div class="mynav_navbar">
+                    <div class="mynav_dropdown">
+                        <button class="mynav_dropbtn">
+                            Sales
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+
+                        <div class="mynav_dropdown-content">
+                            @Html.ActionLink("Create a New Sale", "NewSale", "Sales")
+                            @Html.ActionLink("Return a Sale", "ReturnLookup", "Sales")
+                            @Html.ActionLink("Transaction Lookup", "TransactionLookup", "Sales")
+                        </div>
+
+                    </div>
+                    <div class="mynav_dropdown">
+
+                        <button class="mynav_dropbtn">
+                            Inventory
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+
+                        <div class="mynav_dropdown-content">
+                            @Html.ActionLink("Categories", "Index", "Categories", new { @class = "landing-page" }, null)
+                            @Html.ActionLink("Product Management", "Products", "Inventories", new { @class = "landing-page" }, null)
+                            @Html.ActionLink("Purchase Orders", "PurchaseOrderHome", "PurchaseOrders", new { @class = "landing-page" }, null)
+                        </div>
+                    </div>
+                    @Html.ActionLink("Customer", "Index", "Customers")
+                    @Html.ActionLink("Employee", "Index", "Employees")
+                    @Html.ActionLink("Sign Out", "Logout", "Home")
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Music Store Toolkit</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

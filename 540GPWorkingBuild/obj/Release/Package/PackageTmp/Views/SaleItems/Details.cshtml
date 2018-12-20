@@ -1,0 +1,50 @@
+﻿@model _540GPWorkingBuild.Models.SaleItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SaleItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Returned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Returned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale.SaleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale.SaleID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SaleItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

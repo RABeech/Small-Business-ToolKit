@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Debug";
+}
+
+<h2>Debug</h2>
+
+<p>
+    Product ID
+</p>
+@Html.DisplayName(Int32.Parse(Session["productid"].ToString()).ToString())
+<p>
+    Purchase Order ID
+</p>
+@Html.DisplayName(Session["poid"].ToString())
+<p>
+    Inventory 'was' null
+</p>
+@Html.DisplayName(Session["invnull"].ToString())

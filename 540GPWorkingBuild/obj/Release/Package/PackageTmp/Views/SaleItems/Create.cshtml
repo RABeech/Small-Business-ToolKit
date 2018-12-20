@@ -1,0 +1,129 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.SaleItem>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Sale</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstOrDefault().ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstOrDefault().ProductID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstOrDefault().Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstOrDefault().Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstOrDefault().Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div style='text-align:right;'>
+                    <input type="submit" value="Add to purchase" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<hr style="border:0px;border-top:1px solid black;width:1150px;" />
+
+<p style="text-align:left;">
+    Thanks for shopping with us
+    <span style="float:right;">864-864-8644</span>
+</p>
+<p style="text-align:left;">
+    Transaction ID: @Html.Name(Session["Current SaleID"].ToString())
+    <span style="float:right;">Date: </span>
+</p>
+<p>Employee ID: @Html.DisplayName(Session["UserID"].ToString())</p>
+<p>Customer ID: @Html.Name(Session["Current CustomerID"].ToString())</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inventory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSIPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(x => x.SaleID == Int32.Parse(Session["Current SaleID"].ToString())))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSIPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Remove from sale", "Cancel", new { id = item.SaleItemID }, null)
+            </td>
+        </tr>
+    }
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale.TotalSaleItems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale.TotalSalePrice)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @if (Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayFor(model => model.LastOrDefault().Sale.TotalSaleItems)}
+            @if (!Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayName("0")}
+        </td>
+        <td>
+            @if (Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayFor(model => model.LastOrDefault().Sale.TotalSalePrice)}
+            @if (!Model.LastOrDefault().SaleID.Equals(Session["Current SaleID"]))
+            {@Html.DisplayName("0")}
+        </td>
+    </tr>
+
+</table>
+
+<div style="text-align:left;">
+    @Html.ActionLink("Back To Customer/Employee Lookup", "NewSale", "Sales")
+    <span style="float:right;">@Html.ActionLink("Checkout", "CheckOut")</span>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,52 @@
+﻿@model _540GPWorkingBuild.Models.Employee
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+        
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table align="center">
+            <tr>
+                <td>@Html.LabelFor(a => a.EmployeeID)&nbsp;</td>
+                <td class="login-text">@Html.TextBoxFor(a => a.EmployeeID)</td>
+                <td>@Html.ValidationMessageFor(a => a.EmployeeID, Session["EmpLoginError"].ToString())</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Password)
+                </td>
+                <td class="login-text">
+                    <br/>
+                    @Html.PasswordFor(a => a.Password)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Password, Session["PassLoginError"].ToString())
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <br/>
+                    <input type="submit" class="btn btn-info" name="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}  

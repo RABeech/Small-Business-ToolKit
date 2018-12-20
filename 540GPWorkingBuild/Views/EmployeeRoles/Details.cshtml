@@ -1,0 +1,26 @@
+﻿@model _540GPWorkingBuild.Models.EmployeeRole
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployeeRole</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpRole)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpRole)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

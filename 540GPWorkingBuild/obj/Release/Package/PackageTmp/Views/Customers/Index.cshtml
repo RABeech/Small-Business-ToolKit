@@ -1,0 +1,99 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.Customer>
+
+@{
+    ViewBag.Title = "Customer";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h2>Customers</h2> <input type="button" class="btn btn-info" value="Create New" onclick="location.href='@Url.Action("Create")'" /></div>
+    <div class="panel-body">
+
+        <h3>Customer Lookup</h3>
+        <p>Lookup a customer by inputing one of the search fields below:</p>
+
+        <p>
+
+            @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+            {
+
+                @Html.RadioButton("option", "CustomerID")
+                <text>Customer ID</text>
+                @Html.RadioButton("option", "CustomerPhone")
+                <text>Customer Phone Number</text>
+                @Html.RadioButton("option", "CustFirstName")
+                <text>Customer First Name</text>
+                @Html.RadioButton("option", "CustLastName")
+                <text>Customer Last Name</text>
+                @Html.TextBox("search")
+
+                <input type="submit" class="btn btn-info" name="submit" value="Search" />
+                <input type="button" class="btn btn-info" value="Reset Search" onclick="location.href='@Url.Action("Index")'" />
+            }
+
+        </p>
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.StreetAddress)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.StreetAddress)
+                </td>
+
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>    
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("edit", new { id = item.CustomerID})">Edit</a></li>
+                            <li><a href="@Url.Action("Details", new { id = item.CustomerID})">Details</a></li>
+                            <li><a href="@Url.Action("Delete", new { id = item.CustomerID})">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

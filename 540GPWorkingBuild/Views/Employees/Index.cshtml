@@ -1,0 +1,102 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Models.Employee>
+
+@{
+    ViewBag.Title = "Employees";
+}
+<div class="panel panel-default">
+    <div class="panel-heading"><h2>Employees</h2><input type="button" class="btn btn-info" value="Create New" onclick="location.href='@Url.Action("Create")'" /></div>
+
+    <div class="panel-body">
+        <h3>Employee Lookup</h3>
+        <p>Lookup an employee by inputing one of the search fields below:</p>
+
+        <p>
+            @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+            {
+                //the following are search options
+
+                @Html.RadioButton("option", "EmployeeID")
+                <text>Employee ID</text>
+                @Html.RadioButton("option", "EmployeePhone")
+                <text>Employee Phone Number</text>
+                @Html.RadioButton("option", "EmpFirstName")
+                <text>Employee First Name</text>
+                @Html.RadioButton("option", "EmpLastName")
+                <text>Employee Last Name</text>
+                @Html.TextBox("search")
+
+                <input type="submit" class="btn btn-info" name="submit" value="Search" />
+                <input type="button" class="btn btn-info" value="Reset Search" onclick="location.href='@Url.Action("Index")'" />
+            }
+        </p>
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address.StreetAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeRole.EmpRole)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HireDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.StreetAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeRole.EmpRole)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("edit", new { id = item.EmployeeID})">Edit</a></li>
+                            <li><a href="@Url.Action("Details", new { id = item.EmployeeID})">Details</a></li>
+                            <li><a href="@Url.Action("Delete", new { id = item.EmployeeID})">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

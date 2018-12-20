@@ -1,0 +1,78 @@
+﻿@model IEnumerable<_540GPWorkingBuild.Controllers.SalesController.soWithItems>
+@{
+    /**/
+
+    ViewBag.Title = "TransactionLookup";
+}
+
+<h2>Transaction Lookup</h2>
+
+@using (Html.BeginForm("TransactionLookup", "Sales", FormMethod.Get))
+{
+    <b>Search Option: </b>
+    @Html.RadioButton("option", "ID")<text>&nbspSale ID</text>
+    @Html.RadioButton("option", "Employee ID")<text>&nbspEmployee ID</text>
+    @Html.RadioButton("option", "Customer ID")<text>&nbspCustomer ID</text>
+    @Html.RadioButton("option", "Date")<text>&nbspDate</text>
+    @Html.TextBox("search")
+    <input type="submit"
+           name="submit"
+           value="Search" />
+}
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Transaction ID
+        </th>
+        <th>
+            Customer ID
+        </th>
+        <th>
+            Employee ID
+        </th>
+        <th>
+            Sale Date
+        </th>
+        <th>
+            Total Items
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        double price = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getTotalSalePrice(item.s.SaleID);
+        int items = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getTotalSaleItems(item.s.SaleID);
+        string status = ((_540GPWorkingBuild.Controllers.SalesController)this.ViewContext.Controller).getStatus(item.s.SaleID);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.SaleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s.saleDateString)
+            </td>
+            <td>
+                @Html.Name(items.ToString())
+            </td>
+            <td>
+                $@Html.Name(price.ToString())
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.s.SaleID }) |
+                @Html.ActionLink("Delete", "Cancel", new { id = item.s.SaleID })
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="~/Sales/Index" class="btn btn-info">Return to Sales Menu</a>

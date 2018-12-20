@@ -1,0 +1,124 @@
+﻿@model _540GPWorkingBuild.Controllers.SalesController.soWithItems
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sale Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Transaction ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.SaleID)
+        </dd>
+
+        <dt>
+            Customer ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.CustomerID)
+        </dd>
+
+        <dt>
+            Employee ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.EmployeeID)
+        </dd>
+
+        <dt>
+            Sale Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.saleDateString)
+        </dd>
+
+        <dt>
+            Total Items
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.TotalSaleItems)
+        </dd>
+
+        <dt>
+            Total Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s.TotalSalePrice)
+        </dd>
+
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Product ID
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Item Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.itemList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory.SalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSIPrice)
+            </td>
+            <td>
+                @if (item.Returned != 1)
+                {@Html.ActionLink("Return Item(s)", "Return", "SaleItems", new { id = item.SaleItemID }, null)}
+                @if (item.Returned == 1)
+                {@Html.DisplayName("RETURNED")}
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @if (Model.itemList.All(x => x.Returned != 1))
+    {@Html.ActionLink("Return Transaction", "ReturnTransaction", new { id = Model.s.SaleID }, null)}
+</p>
+<p>
+    @Html.ActionLink("Back to Lookup", "TransactionLookup")
+</p>
+<p>
+    @Html.ActionLink("Cancel", "Index")
+</p>
