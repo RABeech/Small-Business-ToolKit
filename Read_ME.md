@@ -13,6 +13,8 @@ ASP.NET MVC application built to serve a small to mid-size business. Offers the 
 * Create iventory items
 * Manage existing items including real time product quantities
 * Crate new purchase orders
+* Complete mock sales transactions
+* Complete mock return transactions
 * Lookup open purchase orders with the option to receive open purchase orders
 * View previously recieved purchase orders
 * View previous customr transactions
